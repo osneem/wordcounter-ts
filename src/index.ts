@@ -6,19 +6,16 @@ if (process.argv.length < 3) {
     process.exit(1);
 }
 // Read the file and print its contents.
-function initWordCounter() {
+export function initWordCounter() {
     fs.readFile(filename, 'utf8', function (err: string, data: any) {
         if (err) throw err;
-
         console.log('OK: ' + filename);
         console.log('String from file: ' + data);
         wordCounter(data);
-
-    
     });
 }
 
-function wordCounter(data: any) {
+export function wordCounter(data: any) {
     data = stripLineBreaks(data);
     console.log('String with line breaks stripped: ' + data)
     data = stripSymbols(data);
@@ -34,36 +31,36 @@ function wordCounter(data: any) {
 }
 
 // strip all line breaks from string
-function stripLineBreaks(data: string) {
+export function stripLineBreaks(data: string) {
     let strStripped = data.replace(/\r?\n|\r/g, ' ');
     return strStripped;
 }
 
 // strip all unnecessary symbols from string
-function stripSymbols(data: string) {
+export function stripSymbols(data: string) {
     let strStripped = data.replace(/[^a-zA-ZöäüõÖÄÜÕ\-' ]/g, '');
     return strStripped;
 }
 
 // separate string into array of lowercase words
-function arrayOfLowercaseWords(data: string) {
+export function arrayOfLowercaseWords(data: string) {
     let words = data.toLowerCase().split(' ');
     return words;
 }
 
 // sorts array of words into alphabetical order
-function arraySortAlphabetical(array: []) {
+export function arraySortAlphabetical(array: []) {
     array = array.sort();
     return array;
 }
 // removes whitespace elements from array
-function arrayRemoveWhitespace(array = []){
+export function arrayRemoveWhitespace(array = []){
     array = array.filter(word => word !== '')
     return array;
 }
 
 // form map with word as key and frequency count as value
-function objectOfWordCounts(data = []) {
+export function objectOfWordCounts(data = []) {
     let wordCounts = new Map<string, number>();
     data.forEach(word => {
         wordCounts.set(word, (wordCounts.get(word) || 0) + 1);
