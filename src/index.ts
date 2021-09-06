@@ -5,34 +5,34 @@ if (process.argv.length < 3) {
     console.log('Usage: ts-node ' + process.argv[1] + ' FILENAME');
     process.exit(1);
 }
+// initializes the word frequency counter
+initWordCounter();
+
+//#region main methods
+
 // read the file and print its contents.
 export function initWordCounter(): void {
     fs.readFile(filename, 'utf8', function (err: string, data: string) {
         if (err) throw err;
-        //console.log('OK: ' + filename);
-        //console.log('String from file: ' + data);
+        
         commandSequencer(data);
     });
 
 }
-
-export function commandSequencer(data: string) {
+// executes the commands needed to count word frequency
+export function commandSequencer(data: string): void {
     data = stripLineBreaks(data);
-    console.log('String with line breaks stripped: ' + data)
     data = stripSymbols(data);
-    console.log('String with unnecessary symbols stripped: ' + data);
     let array : string[] = arrayOfLowercaseWords(data);
-    console.log('String into array of lowercase words: ' + data);
     array = arraySortAlphabetical(array);
-    console.log('Array into alphabetical order: ' + array);
     array = arrayRemoveWhitespace(array)
-    console.log('Array with whitespaces removed: ' + array)
-    let map : Map<string, number> = objectOfWordCounts(array);
-    console.log(map);
+    let map : Map<string, number> = mapOfWordCounts(array);
     showResults(map);
     
 }
+//#endregion 
 
+//#region helper methods
 // strip all line breaks from string
 export function stripLineBreaks(data: string): string {
     let strStripped = data.replace(/\r?\n|\r/g, ' ');
@@ -63,7 +63,7 @@ export function arrayRemoveWhitespace(array: string[]): string[]{
 }
 
 // form map with word as key and frequency count as value
-export function objectOfWordCounts(array: string[]): Map<string, number> {
+export function mapOfWordCounts(array: string[]): Map<string, number> {
     let wordCounts = new Map<string, number>();
     array.forEach(word => {
         wordCounts.set(word, (wordCounts.get(word) || 0) + 1);       
@@ -78,5 +78,6 @@ export function showResults(map: Map<string, number>): Map<string, number>{
     return map;
 }
 
+//#endregion 
 
-initWordCounter();
+
