@@ -6,7 +6,7 @@ test('basic', () => {
 });
 
 test('basic', () => {
-  expect(stripSymbols('Hi, my name is Oskar and this is a string, which has too many symbols!')).toEqual('Hi my name is Oskar and this is a string which has too many symbols');
+  expect(stripSymbols('Hi, this is a string, which has too many symbols!')).toEqual('Hi  this is a string which has too many symbols');
 });
 
 test('basic', () => {

@@ -5,12 +5,12 @@ if (process.argv.length < 3) {
     console.log('Usage: ts-node ' + process.argv[1] + ' FILENAME');
     process.exit(1);
 }
-// Read the file and print its contents.
+// read the file and print its contents.
 export function initWordCounter(): void {
     fs.readFile(filename, 'utf8', function (err: string, data: string) {
         if (err) throw err;
-        console.log('OK: ' + filename);
-        console.log('String from file: ' + data);
+        //console.log('OK: ' + filename);
+        //console.log('String from file: ' + data);
         commandSequencer(data);
     });
 
