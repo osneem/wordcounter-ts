@@ -1,5 +1,3 @@
-import { stringify } from "querystring";
-
 var fs = require('fs')
     , filename = process.argv[2];
 // makes sure there is a filename on the command line.
@@ -9,12 +7,13 @@ if (process.argv.length < 3) {
 }
 // Read the file and print its contents.
 export function initWordCounter() {
-    fs.readFile(filename, 'utf8', function (err: string, data: any) {
+    fs.readFile(filename, 'utf8', function (err: string, data: string) {
         if (err) throw err;
         console.log('OK: ' + filename);
         console.log('String from file: ' + data);
         commandSequencer(data);
     });
+
 }
 
 export function commandSequencer(data: string) {
@@ -35,46 +34,44 @@ export function commandSequencer(data: string) {
 }
 
 // strip all line breaks from string
-export function stripLineBreaks(data: string) {
+export function stripLineBreaks(data: string): string {
     let strStripped = data.replace(/\r?\n|\r/g, ' ');
     return strStripped;
 }
 
 // strip all unnecessary symbols from string
-export function stripSymbols(data: string) {
+export function stripSymbols(data: string): string {
     let strStripped = data.replace(/[^a-zA-ZöäüõÖÄÜÕ\-' ]/g, '');
     return strStripped;
 }
 
 // separate string into array of lowercase words
-export function arrayOfLowercaseWords(data: string) {
+export function arrayOfLowercaseWords(data: string): string[] {
     let words = data.toLowerCase().split(' ');
     return words;
 }
 
 // sorts array of words into alphabetical order
-export function arraySortAlphabetical(array: string[]) {
+export function arraySortAlphabetical(array: string[]): string[] {
     array = array.sort();
     return array;
 }
 // removes whitespace elements from array
-export function arrayRemoveWhitespace(array: string[]){
-    array = array.filter(word => word !== '')
+export function arrayRemoveWhitespace(array: string[]): string[]{
+    array = array.filter(word => word != ' ')
     return array;
 }
 
 // form map with word as key and frequency count as value
-export function objectOfWordCounts(array: string[]) {
+export function objectOfWordCounts(array: string[]): Map<string, number> {
     let wordCounts = new Map<string, number>();
     array.forEach(word => {
-        wordCounts.set(word, (wordCounts.get(word) || 0) + 1);
-        //wordCounts[word] = (wordCounts[word] || 0) + 1;
-        
+        wordCounts.set(word, (wordCounts.get(word) || 0) + 1);       
     });
     return wordCounts;
 }
-// adds a colon in between they key and value to show results of the word counter
-export function showResults(map: Map<string, number>) {
+// adds a colon between the key and value to show results of the word counter
+export function showResults(map: Map<string, number>): Map<string, number>{
     for (let entry of map.entries()) {
         console.log(entry[0], ':', entry[1]);
     }
