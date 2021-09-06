@@ -13,25 +13,25 @@ export function initWordCounter() {
         if (err) throw err;
         console.log('OK: ' + filename);
         console.log('String from file: ' + data);
-        wordCounter(data);
+        commandSequencer(data);
     });
 }
 
-export function wordCounter(data: any) {
+export function commandSequencer(data: string) {
     data = stripLineBreaks(data);
     console.log('String with line breaks stripped: ' + data)
     data = stripSymbols(data);
     console.log('String with unnecessary symbols stripped: ' + data);
-    data = arrayOfLowercaseWords(data);
+    let array : string[] = arrayOfLowercaseWords(data);
     console.log('String into array of lowercase words: ' + data);
-    data = arraySortAlphabetical(data);
-    console.log('Array into alphabetical order: ' + data);
-    data = arrayRemoveWhitespace(data)
-    console.log('Array with whitespaces removed: ' + data)
-    data = objectOfWordCounts(data);
-    console.log(data);
-    data = showResults(data);
-    console.log(data);
+    array = arraySortAlphabetical(array);
+    console.log('Array into alphabetical order: ' + array);
+    array = arrayRemoveWhitespace(array)
+    console.log('Array with whitespaces removed: ' + array)
+    let map : Map<string, number> = objectOfWordCounts(array);
+    console.log(map);
+    showResults(map);
+    
 }
 
 // strip all line breaks from string
@@ -53,20 +53,20 @@ export function arrayOfLowercaseWords(data: string) {
 }
 
 // sorts array of words into alphabetical order
-export function arraySortAlphabetical(array: []) {
+export function arraySortAlphabetical(array: string[]) {
     array = array.sort();
     return array;
 }
 // removes whitespace elements from array
-export function arrayRemoveWhitespace(array = []){
+export function arrayRemoveWhitespace(array: string[]){
     array = array.filter(word => word !== '')
     return array;
 }
 
 // form map with word as key and frequency count as value
-export function objectOfWordCounts(data = []) {
+export function objectOfWordCounts(array: string[]) {
     let wordCounts = new Map<string, number>();
-    data.forEach(word => {
+    array.forEach(word => {
         wordCounts.set(word, (wordCounts.get(word) || 0) + 1);
         //wordCounts[word] = (wordCounts[word] || 0) + 1;
         
@@ -78,6 +78,7 @@ export function showResults(map: Map<string, number>) {
     for (let entry of map.entries()) {
         console.log(entry[0], ':', entry[1]);
     }
+    return map;
 }
 
 

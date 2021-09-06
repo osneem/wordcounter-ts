@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "clear_jest": "jest --clearCache"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/word-counter-ts/index.test.ts/"
+    ]
   },
   "keywords": [],
   "author": "",
