@@ -58,7 +58,7 @@ export function arraySortAlphabetical(array: string[]): string[] {
 }
 // removes whitespace elements from array
 export function arrayRemoveWhitespace(array: string[]): string[]{
-    array = array.filter(word => word != ' ')
+    array = array.filter(word => word.trim().length > 0)
     return array;
 }
 
