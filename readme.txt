@@ -13,6 +13,6 @@ ts-node ./src/index.ts ./src/source.txt
 npm t index.test.ts
 
 (Please notice that after all of the tests have ran successfully
-the terminal will encounter a error: [Error: ENOENT: no such file or directory].
+the terminal will encounter a error: '[Error: ENOENT: no such file or directory]'.
 This is possibly caused by a false configuration of the testing framework,
 but I ran out of ideas on how to solve it.)
