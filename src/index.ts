@@ -6,7 +6,7 @@ if (process.argv.length < 3) {
     process.exit(1);
 }
 // Read the file and print its contents.
-export function initWordCounter() {
+export function initWordCounter(): void {
     fs.readFile(filename, 'utf8', function (err: string, data: string) {
         if (err) throw err;
         console.log('OK: ' + filename);
