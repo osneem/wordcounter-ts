@@ -1,3 +1,5 @@
+import { stringify } from "querystring";
+
 var fs = require('fs')
     , filename = process.argv[2];
 // makes sure there is a filename on the command line.
@@ -27,6 +29,8 @@ export function wordCounter(data: any) {
     data = arrayRemoveWhitespace(data)
     console.log('Array with whitespaces removed: ' + data)
     data = objectOfWordCounts(data);
+    console.log(data);
+    data = showResults(data);
     console.log(data);
 }
 
@@ -68,6 +72,12 @@ export function objectOfWordCounts(data = []) {
         
     });
     return wordCounts;
+}
+// adds a colon in between they key and value to show results of the word counter
+export function showResults(map: Map<string, number>) {
+    for (let entry of map.entries()) {
+        console.log(entry[0], ':', entry[1]);
+    }
 }
 
 
