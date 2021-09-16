@@ -8,24 +8,25 @@ if (process.argv.length < 3) {
     process.exit(1);
 }
 // initializes the word frequency counter
-initWordCounter();
+initFileReader();
 
 //#region main methods
 
 // read the file and print its contents.
-export function initWordCounter(): void {
+export function initFileReader(): void {
     fs.readFile(filename, 'utf8', (err, data) => {
         if (err) throw err;
         
-        commandSequencer(data);
+        initWordCounter(data);
     });
 
 }
 // executes the commands needed to count word frequency
-export function commandSequencer(data: string): void {
+export function initWordCounter(data: string): void {
     data = stripLineBreaks(data);
     data = stripSymbols(data);
-    let array : string[] = arrayOfLowercaseWords(data);
+    data = stringToLowercase(data);
+    let array : string[] = arrayOfWords(data);
     array = arraySortAlphabetical(array);
     array = arrayRemoveWhitespace(array)
     let map : Map<string, number> = mapOfWordCounts(array);
@@ -48,8 +49,13 @@ export function stripSymbols(data: string): string {
 }
 
 // separate string into array of lowercase words
-export function arrayOfLowercaseWords(data: string): string[] {
-    let words = data.toLowerCase().split(' ');
+export function stringToLowercase(data: string): string {
+    let words = data.toLowerCase();
+    return words;
+}
+
+export function arrayOfWords(data: string): string[] {
+    let words = data.split(' ');
     return words;
 }
 
