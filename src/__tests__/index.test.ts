@@ -1,4 +1,4 @@
-import { arrayRemoveWhitespace, stripSymbols, stripLineBreaks, arrayOfLowercaseWords, arraySortAlphabetical, mapOfWordCounts } from "../index";
+import { arrayRemoveWhitespace, stripSymbols, stripLineBreaks, stringToLowercase, arrayOfWords, arraySortAlphabetical, mapOfWordCounts } from "../index";
 
 test('testLineBreakRemoval', () => {
   expect(stripLineBreaks('Replace new line\n with whitespace!')).
@@ -15,8 +15,13 @@ test('testSymbolRemovalUmlaut', () => {
     .toEqual('Selles  stringis on mõned kahtlased sümbolid');
 });
 
-test('testArrayOfLowerCase', () => {
-  expect(arrayOfLowercaseWords('A bUncH Of woRDS fOr tesTInG PuRpOsEs'))
+test('testStringToLowercase', () => {
+  expect(stringToLowercase('A LoNg StRiNg wItH mIxeD CaSINg'))
+    .toEqual('a long string with mixed casing')
+})
+
+test('testArrayOfWords', () => {
+  expect(arrayOfWords('a bunch of words for testing purposes'))
     .toEqual(['a', 'bunch', 'of', 'words', 'for', 'testing', 'purposes']);
 });
 

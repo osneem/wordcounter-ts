@@ -11,7 +11,7 @@ if (process.argv.length < 3) {
     process.exit(1);
 }
 // initializes the word frequency counter
-initFileStreamer();
+initFileReader();
 
 //#region main methods
 
