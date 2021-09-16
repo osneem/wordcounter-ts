@@ -1,4 +1,7 @@
 import * as fs from 'fs';
+var readline = require('readline');
+var stream = require('stream');
+
 const filename = process.argv[2];
 //var fs = require('fs'), filename = process.argv[2];
 
@@ -8,7 +11,7 @@ if (process.argv.length < 3) {
     process.exit(1);
 }
 // initializes the word frequency counter
-initFileReader();
+initFileStreamer();
 
 //#region main methods
 
@@ -19,6 +22,20 @@ export function initFileReader(): void {
         
         initWordCounter(data);
     });
+
+}
+
+export function initFileStreamer(): void {
+    
+    const instream = fs.createReadStream(filename, {encoding: 'utf8'});
+    const outstream = new stream;
+    outstream.readable = true;
+    outstream.writable = true;
+    var rl = readline.createInterface({ input: instream, output: outstream, terminal: false});
+    rl.on('line', function(line: any) {
+        
+        rl.write(initWordCounter(line));
+    })
 
 }
 // executes the commands needed to count word frequency
@@ -48,12 +65,13 @@ export function stripSymbols(data: string): string {
     return strStripped;
 }
 
-// separate string into array of lowercase words
+// string to lowercase
 export function stringToLowercase(data: string): string {
     let words = data.toLowerCase();
     return words;
 }
 
+// split string into array at whitespaces
 export function arrayOfWords(data: string): string[] {
     let words = data.split(' ');
     return words;
