@@ -1,4 +1,6 @@
-var fs = require('fs'), filename = process.argv[2];
+import * as fs from 'fs';
+const filename = process.argv[2];
+//var fs = require('fs'), filename = process.argv[2];
 
 // makes sure there is a filename on the command line.
 if (process.argv.length < 3) {
@@ -12,7 +14,7 @@ initWordCounter();
 
 // read the file and print its contents.
 export function initWordCounter(): void {
-    fs.readFile(filename, 'utf8', function (err: string, data: string) {
+    fs.readFile(filename, 'utf8', (err, data) => {
         if (err) throw err;
         
         commandSequencer(data);
