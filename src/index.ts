@@ -1,5 +1,5 @@
-var fs = require('fs')
-    , filename = process.argv[2];
+var fs = require('fs'), filename = process.argv[2];
+
 // makes sure there is a filename on the command line.
 if (process.argv.length < 3) {
     console.log('Usage: ts-node ' + process.argv[1] + ' FILENAME');
