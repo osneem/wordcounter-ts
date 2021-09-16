@@ -2,7 +2,10 @@
 2. Open the terminal in the project root folder
 3. Use the following commands to install ts-node & necessary dependencies.
 npm install
+npm install --save @types/node
 npm install -g ts-node
+npm install -g typescript
+
 
 3. To run the word frequency counter use the following command:
 ts-node ./src/index.ts ./src/source.txt
